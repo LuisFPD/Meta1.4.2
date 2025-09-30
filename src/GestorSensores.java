@@ -1,8 +1,6 @@
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class GestorSensores {
     private static GestorSensores instancia;
@@ -58,5 +56,29 @@ public class GestorSensores {
 
     public int obtenerCantidadSensores() {
         return sensores.size();
+    }
+
+    //Nuevos métodos solicitados en la meta para obtener sensores filtrados por tipo y obtener estadisticas:
+
+    public List<Sensor> obtenerSensoresPorTipo(String tipo) {
+        return sensores.values().stream()
+                .filter(s -> s.getTipo().equalsIgnoreCase(tipo))
+                .collect(Collectors.toList());
+    }
+
+    public Map<String, Object> obtenerEstadisticas() {
+        Map<String, Object> stats = new HashMap<>();
+        stats.put("totalSensores", sensores.size());
+        Map<String, Long> conteoPorTipo = sensores.values().stream()
+                .collect(Collectors.groupingBy(Sensor::getTipo, Collectors.counting()));
+        stats.put("sensoresPorTipo", conteoPorTipo);
+        Map<String, Double> promedioPorTipo = sensores.values().stream()
+                .collect(Collectors.groupingBy(
+                        Sensor::getTipo,
+                        Collectors.averagingDouble(Sensor::getValor)
+                ));
+        stats.put("promediosPorTipo", promedioPorTipo);
+
+        return stats;
     }
 }

@@ -30,11 +30,11 @@ public class NotificadorAlertas implements SujetoAlerta {
         }
     }
 
-    @Override
-    public void registrarObservador(ObservadorAlerta observador) {
-        observadores.add(observador);
-        System.out.println("👀 Observador registrado: " + observador.obtenerTipoObservador());
-    }
+//    @Override
+//    public void registrarObservador(ObservadorAlerta observador) {
+//        observadores.add(observador);
+//        System.out.println("👀 Observador registrado: " + observador.obtenerTipoObservador());
+//    }
 
     @Override
     public void eliminarObservador(ObservadorAlerta observador) {
@@ -55,7 +55,23 @@ public class NotificadorAlertas implements SujetoAlerta {
         System.out.println("🔄 Estrategia de análisis cambiada: " + estrategia.getClass().getSimpleName());
     }
 
+    //Nuevo código que reemplaza al registrarObservador del ejemplo del profe para evitar repetidos y añade el metodo
+    //de obtener la cantidad de observadores y dichos observadores.
     public int obtenerCantidadObservadores() {
         return observadores.size();
+    }
+
+    @Override
+    public void registrarObservador(ObservadorAlerta observador) {
+        if (!observadores.contains(observador)) {//De esta forma podemos evitar la aparición de duplicados.
+            observadores.add(observador);
+            System.out.println("👀 Observador registrado: " + observador.obtenerTipoObservador());
+        } else {
+            System.out.println("⚠️ Observador ya registrado: " + observador.obtenerTipoObservador());
+        }
+    }
+
+    public List<ObservadorAlerta> obtenerObservadores() {
+        return new ArrayList<>(observadores);
     }
 }

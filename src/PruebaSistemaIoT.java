@@ -6,6 +6,9 @@ public class PruebaSistemaIoT {
         GestorSensores gestor = GestorSensores.obtenerInstancia();
         NotificadorAlertas notificador = NotificadorAlertas.obtenerInstancia();
 
+        //Se encarga de utilizar la estraegia indicada
+        notificador.establecerEstrategiaAnalisis(new EstrategiaAnalisisTemperatura());
+
         // Registrar observadores
         notificador.registrarObservador(new NotificadorEmail());
         notificador.registrarObservador(new NotificadorDashboard());

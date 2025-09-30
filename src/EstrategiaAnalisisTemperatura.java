@@ -10,11 +10,14 @@ public class EstrategiaAnalisisTemperatura implements EstrategiaAnalisis {
             return new Alerta(sensor.getId(),
                     "❌ TEMPERATURA CRÍTICA: " + valor + "°C en " + sensor.getUbicacion(),
                     NivelAlerta.CRITICO, new Date());
-        } else if (valor > 60.0) {
+        } else if (valor > 40.0) {
             return new Alerta(sensor.getId(),
                     "⚠️ Temperatura alta: " + valor + "°C en " + sensor.getUbicacion(),
                     NivelAlerta.ADVERTENCIA, new Date());
+        } else {
+            return new Alerta(sensor.getId(),
+                    "   Temperatura Normal: " + valor + "°C en " + sensor.getUbicacion(),
+                    NivelAlerta.INFORMATIVO, new Date());
         }
-        return null;
     }
 }
