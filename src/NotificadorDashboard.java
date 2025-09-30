@@ -1,3 +1,4 @@
+//Meta 1.4.2 - Luis Fernando Prieto Duarte
 public class NotificadorDashboard implements ObservadorAlerta {
     @Override
     public void actualizar(Alerta alerta) {

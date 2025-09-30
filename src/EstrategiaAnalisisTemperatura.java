@@ -1,3 +1,4 @@
+//Meta 1.4.2 - Luis Fernando Prieto Duarte
 import java.util.Date;
 
 public class EstrategiaAnalisisTemperatura implements EstrategiaAnalisis {
